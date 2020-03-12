@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  webservice:
+    container_name: spring-boot-webservice
+    build:
+      context: ../../spring-boot-webservice
+      dockerfile: Dockerfile
+    image: boilerplates/spring-boot-webservice-0.0.1:latest
+    environment:
+      SPRING_APPLICATION_JSON: '{"server": {"port": 8000}}'
+    ports:
+      - 8080:8000
+    logging:
+      driver: json-file
+  webapp:
+    container_name: spring-boot-webapp
+    build:
+      context: ../../spring-boot-webapp
+      dockerfile: Dockerfile
+    image: boilerplates/spring-boot-webapp-0.0.1:latest
+    environment:
+      SPRING_APPLICATION_JSON: '{"server": {"port": 8000}, "user": {"webservice": {"url": "http://webservice:8000/services"}}}'
+    ports:
+      - 80:8000
+    depends_on:
+      - webservice
+    logging:
+      driver: json-file
