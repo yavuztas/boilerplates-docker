@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     image: boilerplates/spring-boot-webapp-0.0.1:latest
     environment:
-      SPRING_APPLICATION_JSON: '{"server": {"port": 8000}, "app": {"user": {"webservice": {"url": "http://webservice:8000/api/v/1.0"}}}}'
+      SPRING_APPLICATION_JSON: '{"server": {"port": 8000}, "app": {"user": {"webservice": {"url": "http://webservice:8000/api/1.0"}}}}'
     ports:
       - 80:8000
     depends_on:
